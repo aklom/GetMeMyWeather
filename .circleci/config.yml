@@ -31,4 +31,4 @@ jobs:
             sudo apt-get install python-dev
             sudo pip install awscli
 
-            aws --region us-west-2 s3 sync build weatherapp.lalilo.com
+            aws s3 sync build s3://weatherapp.lalilo.com
