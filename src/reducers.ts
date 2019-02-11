@@ -1,4 +1,5 @@
 import { stateInterface, actionInterface } from "./interfaces";
+import { UnitChange } from "./actions";
 const initialState: stateInterface = {
   temperature: 0,
   weather: "",
@@ -7,8 +8,16 @@ const initialState: stateInterface = {
 };
 
 export const reducer = (state = initialState, action: actionInterface) => {
-  if (action.type === "CHANGE_WEATHER") {
-    return { ...state, weather: "Heyyyy" };
+  switch (action.type) {
+    case UnitChange:
+      return Object.assign({}, state, {
+        unit: action.payload.unit,
+        temperature: action.payload.temperature,
+        weather: action.payload.weather,
+        windSpeed: action.payload.windSpeed
+      });
+
+    default:
+      return state;
   }
-  return state;
 };

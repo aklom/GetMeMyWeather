@@ -1,65 +1,50 @@
-import React, { Component } from "react";
-import { getWeatherData } from "./api";
-import { ToggleSwitch } from "./ToggleSwitch";
-
+import React, { Component, Dispatch } from "react";
+import ToggleSwitch from "./ToggleSwitch";
 import "./App.css";
 import { Temperature } from "./Temperature";
 import { WindSpeed } from "./WindSpeed";
-import { stateInterface } from "./interfaces";
+import { stateInterface, Unit } from "./interfaces";
+import { connect } from "react-redux";
+import { setUnit } from "./functions";
 
-import { createStore } from "redux";
-import { reducer } from "./reducers";
-export const store = createStore(reducer);
-
-class App extends Component<{}, stateInterface> {
-  state = {
-    temperature: 100,
-    weather: "",
-    windSpeed: 0,
-    unit: "metric"
-  };
-
+class App extends Component<
+  { weather: string; unit: string; setInitialState: (unit: string) => {} },
+  stateInterface
+> {
   componentDidMount() {
-    getWeatherData(store.getState().unit).then(
-      ({ temperature, weather, wind_speed }) =>
-        this.setState({
-          temperature,
-          weather,
-          windSpeed: wind_speed
-        })
-    );
+    this.props.setInitialState(Unit.IMPERIAL);
   }
-
-  onUnitChange2 = (unit: string) => {
-    getWeatherData(unit).then(data => {
-      this.setState({
-        temperature: data.temperature,
-        weather: data.weather,
-        windSpeed: data.wind_speed,
-        unit: unit
-      });
-    });
-  };
 
   render() {
     return (
       <div>
-        <Temperature
-          value={store.getState().temperature}
-          unit={store.getState().unit === "metric" ? " °C" : " °F"}
-        />
-        <WindSpeed
-          value={store.getState().windSpeed}
-          unit={store.getState().unit === "metric" ? "km / h" : "mi / h"}
-        />
-        <div> {store.getState().weather}</div>
+        <Temperature />
+        <WindSpeed />
+        <div> {this.props.weather}</div>
         <ToggleSwitch
-          unit={store.getState().unit}
-          onUnitChange={this.onUnitChange2}
+          changeUnit={() => {
+            return new Promise(() => console.log("Heyyy"));
+          }}
         />
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state: stateInterface) {
+  return {
+    weather: state.weather,
+    unit: state.unit
+  };
+}
+
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+  return {
+    setInitialState: (unit: string) => setUnit(unit, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

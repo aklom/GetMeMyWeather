@@ -1,15 +1,10 @@
 import axios from "axios";
-
-interface WeatherApiResponse {
-  main: {
-    temp: number;
-  };
-  weather: Array<{ description: string }>;
-  wind: { speed: number };
-}
+import { WeatherApiResponse } from "./interfaces";
+import { Dispatch } from "react";
+import { UnitChange } from "./actions";
 
 export const getWeatherData = (unit: string) => {
-  console.log("Weather");
+  console.log("Get Weather Data");
   return axios
     .request<WeatherApiResponse>({
       url: `https://api.openweathermap.org/data/2.5/weather?q=Paris&units=${unit}`,
@@ -21,6 +16,16 @@ export const getWeatherData = (unit: string) => {
     .then(response => ({
       temperature: response.data.main.temp,
       weather: response.data.weather[0].description,
-      wind_speed: response.data.wind.speed
+      windSpeed: response.data.wind.speed
     }));
+};
+
+export const setUnit = (unit: string, dispatch: Dispatch<any>) => {
+  return getWeatherData(unit).then(data => {
+    console.log("Set Unit ");
+    dispatch({
+      type: UnitChange,
+      payload: { ...data, unit: unit }
+    });
+  });
 };
