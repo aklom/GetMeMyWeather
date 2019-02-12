@@ -1,18 +1,15 @@
 import React, { Component, Dispatch } from "react";
-import ToggleSwitch from "./ToggleSwitch";
 import "./App.css";
 import { Temperature } from "./Temperature";
 import { WindSpeed } from "./WindSpeed";
-import { stateInterface, Unit } from "./interfaces";
+import { stateInterface, Unit, AppInterface } from "./interfaces";
 import { connect } from "react-redux";
 import { setUnit } from "./functions";
+import { ToggleSwitch } from "./ToggleSwitch";
 
-class App extends Component<
-  { weather: string; unit: string; setInitialState: (unit: string) => {} },
-  stateInterface
-> {
+class App extends Component<AppInterface> {
   componentDidMount() {
-    this.props.setInitialState(Unit.IMPERIAL);
+    setUnit(Unit.METRIC, this.props.dispatch);
   }
 
   render() {
@@ -21,30 +18,17 @@ class App extends Component<
         <Temperature />
         <WindSpeed />
         <div> {this.props.weather}</div>
-        <ToggleSwitch
-          changeUnit={() => {
-            return new Promise(() => console.log("Heyyy"));
-          }}
-        />
+        <ToggleSwitch />
       </div>
     );
   }
 }
 
-function mapStateToProps(state: stateInterface) {
+function mapStateToProps(state: AppInterface) {
   return {
     weather: state.weather,
     unit: state.unit
   };
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-  return {
-    setInitialState: (unit: string) => setUnit(unit, dispatch)
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps)(App);

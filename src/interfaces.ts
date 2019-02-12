@@ -1,3 +1,5 @@
+import { Dispatch } from "react";
+
 export interface stateInterface {
   temperature: number;
   weather: string;
@@ -22,6 +24,16 @@ export interface WeatherApiResponse {
   wind: { speed: number };
 }
 
+export interface ToggleSwitchInterface {
+  unit: string;
+  dispatch: Dispatch<any>;
+}
+
+export interface AppInterface {
+  weather: string;
+  unit: string;
+  dispatch: Dispatch<any>;
+}
 export enum Unit {
   METRIC = "metric",
   IMPERIAL = "imperial"

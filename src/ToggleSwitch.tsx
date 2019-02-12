@@ -1,7 +1,7 @@
 import React, { Dispatch } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { stateInterface, promiseInterface, Unit } from "./interfaces";
+import { stateInterface, Unit, ToggleSwitchInterface } from "./interfaces";
 import { setUnit } from "./functions";
 
 const Container = styled.div`
@@ -20,22 +20,19 @@ const Button = styled.button<{ selected: boolean }>`
   outline: none;
 `;
 
-class ToggleSwitch extends React.Component<{
-  unit: string;
-  changeUnit: (unit: string) => Promise<promiseInterface>;
-}> {
+class ToggleSwitch_ extends React.Component<ToggleSwitchInterface> {
   render() {
     return (
       <Container>
         <Button
           selected={this.props.unit == Unit.METRIC}
-          onClick={e => this.props.changeUnit(Unit.METRIC)!}
+          onClick={e => setUnit(Unit.METRIC, this.props.dispatch)}
         >
           Metric
         </Button>
         <Button
           selected={this.props.unit == Unit.IMPERIAL}
-          onClick={e => this.props.changeUnit(Unit.IMPERIAL)!}
+          onClick={e => setUnit(Unit.IMPERIAL, this.props.dispatch)}
         >
           Imperial
         </Button>
@@ -50,13 +47,4 @@ const mapStateToProps = (state: stateInterface) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-  return {
-    changeUnit: (unit: string) => setUnit(unit, dispatch)
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ToggleSwitch);
+export const ToggleSwitch = connect(mapStateToProps)(ToggleSwitch_);
