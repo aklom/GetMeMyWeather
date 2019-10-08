@@ -1,40 +1,30 @@
-import { Dispatch } from "react";
+
+export enum Pages {
+  weather, sun
+}
+
+
+export enum Unit {
+  METRIC = "metric",
+  IMPERIAL = "imperial"
+}
+
 
 export interface stateInterface {
-  temperature: number;
-  weather: string;
-  windSpeed: number;
-  unit: string;
+  temperature: string | undefined;
+  weather: string | undefined;
+  windSpeed: string | undefined;
+  unit: Unit;
+  icon: string | undefined;
+  longitude: number | undefined; 
+  latitude: number | undefined;
+  city: string | undefined; 
+  activePage: Pages
 }
-export interface promiseInterface {
-  temperature: number;
-  weather: string;
-  windSpeed: number;
-}
+
 export interface actionInterface {
   type: string;
   payload: any;
 }
 
-export interface WeatherApiResponse {
-  main: {
-    temp: number;
-  };
-  weather: Array<{ description: string }>;
-  wind: { speed: number };
-}
 
-export interface ToggleSwitchInterface {
-  unit: string;
-  dispatch: Dispatch<any>;
-}
-
-export interface AppInterface {
-  weather: string;
-  unit: string;
-  dispatch: Dispatch<any>;
-}
-export enum Unit {
-  METRIC = "metric",
-  IMPERIAL = "imperial"
-}

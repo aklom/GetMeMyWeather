@@ -1,22 +1,31 @@
-import { stateInterface, actionInterface } from "./interfaces";
-import { UnitChange } from "./actions";
+import { stateInterface, actionInterface, Pages, Unit } from "./interfaces";
+import {  DataChange, PageChange, UnitChange } from "./actions";
+
+
 const initialState: stateInterface = {
-  temperature: 0,
-  weather: "",
-  windSpeed: 0,
-  unit: "metric"
+  temperature: undefined,
+  weather: undefined,
+  windSpeed: undefined,
+  unit: Unit.METRIC, 
+  icon: undefined, 
+  longitude: undefined, 
+  latitude: undefined, 
+  city: undefined, 
+  activePage: Pages.weather
 };
 
 export const reducer = (state = initialState, action: actionInterface) => {
   switch (action.type) {
-    case UnitChange:
-      return Object.assign({}, state, {
-        unit: action.payload.unit,
-        temperature: action.payload.temperature,
-        weather: action.payload.weather,
-        windSpeed: action.payload.windSpeed
-      });
+    
+      case DataChange:
+        return Object.assign({}, state, action.payload);
 
+      case PageChange:
+        return Object.assign({}, state, {...state, ...action.payload});
+  
+      case UnitChange:
+          return Object.assign({}, state, {...state, ...action.payload});
+    
     default:
       return state;
   }
