@@ -11,6 +11,7 @@ import { usePosition } from "./usePosition";
 
 import BackgroundFlowers from './Assets/flowers.png';
 import PlaceholderIcon from "./Assets/placeholder.png";
+import { SunContent } from './SunContent';
 
 const App: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ dispatch, city, icon, activePage, unit }) => {
 
@@ -22,16 +23,17 @@ const App: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ dispatch,
 
   return (<>
     <Wrapper >
-      <PageSwitch activePage={activePage} onClick={() => changeActivePage(activePage, dispatch)}> </PageSwitch>
+      <PageSwitch activePage={activePage} onClick={() => changeActivePage(activePage, dispatch)}/> 
       <City>
-        <Placeholder src={PlaceholderIcon}></Placeholder>
+        <Placeholder src={PlaceholderIcon}/>
         {city}
       </City>
-      <Flowers src={BackgroundFlowers}></Flowers>
+      <Flowers src={BackgroundFlowers}/>
 
-      {icon && activePage === Pages.weather && <>
-        <WeatherContent></WeatherContent>
-      </>}
+      { activePage === Pages.weather && 
+        <WeatherContent/>}
+
+      {activePage === Pages.sun && <SunContent/>}
     </Wrapper>
   </>
   );

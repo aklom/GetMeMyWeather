@@ -57,32 +57,29 @@ const _WeatherContent: React.FC<stateInterface & { dispatch: Dispatch<any> }> = 
 
 
 
-const Side = styled.div`
-  
-  z-index: 30;
-`
 
 const Line = styled.div`
     display: flex; 
     flex-direction: row; 
     justify-content: center;
-
-`
+    
+    `
 
 
 const SecondLine = styled(Line)`
     padding-top: 110px;
-`
+    `
 
 const ThirdLine = styled(Line)`
     padding-top: 180px;
-`
+    `
 
-const RightSide = styled(Side)`
+const RightSide = styled.div`
     padding-left: 400px;
     padding-top: 70px;
     display: flex; 
     flex-direction: column; 
+    z-index: 30;
     
 `
 const Field = styled.div`
