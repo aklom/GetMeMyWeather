@@ -10,7 +10,7 @@ interface WeatherApiResponse {
   weather: Array<{ description: string, icon: string }>;
   wind: { speed: number };
   name: string; 
-  sys: {country: string}
+  sys: {country: string, sunrise: string, sunset: string}
 }
 
 export const getWeatherData = (unit: string, longitude?: number, latitude?: number) => {
@@ -37,7 +37,9 @@ export const getWeatherData = (unit: string, longitude?: number, latitude?: numb
       weather: response.data.weather[0].description,
       windSpeed: `${response.data.wind.speed}${unit === Unit.METRIC ? " km/h" : " mi/h"}`, 
       icon: response.data.weather[0].icon, 
-      city: `${response.data.name},  ${response.data.sys.country}`
+      city: `${response.data.name},  ${response.data.sys.country}`, 
+      sunrise: response.data.sys.sunrise,
+      sunset: response.data.sys.sunset
     }));
 };
 

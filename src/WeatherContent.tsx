@@ -1,4 +1,4 @@
-import React, { Dispatch } from "react"
+import React, {Dispatch} from "react"
 import styled from "styled-components"
 import { stateInterface } from "./interfaces"
 import { mapStateToProps } from './App';
@@ -11,7 +11,7 @@ import { changeActiveUnit } from "./functions";
 
 
 
-const _WeatherContent: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ icon, unit, weather, temperature, windSpeed, city, dispatch, longitude, latitude }) => {
+const _WeatherContent: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ icon, unit, weather, temperature, windSpeed, dispatch }) => {
     const iconImg = icon && icons.filter((item) => item.key === icon)
     const iconSrc = iconImg && iconImg[0].src
 

@@ -13,7 +13,7 @@ import BackgroundFlowers from './Assets/flowers.png';
 import PlaceholderIcon from "./Assets/placeholder.png";
 import { SunContent } from './SunContent';
 
-const App: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ dispatch, city, icon, activePage, unit }) => {
+const App: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ dispatch, city, activePage, unit }) => {
 
   const pos = usePosition()
 
@@ -50,7 +50,9 @@ export function mapStateToProps(state: stateInterface) {
     longitude: state.longitude,
     latitude: state.latitude,
     city: state.city,
-    activePage: state.activePage
+    activePage: state.activePage, 
+    sunset: state.sunset, 
+    sunrise: state.sunrise
   };
 }
 
