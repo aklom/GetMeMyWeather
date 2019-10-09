@@ -2,7 +2,7 @@ import React, { Dispatch, useEffect } from "react";
 import "./App.css";
 import { stateInterface, Pages } from "./interfaces";
 import { connect } from "react-redux";
-import { updateData, changeActivePage, formatDate } from "./functions";
+import { updateData, changeActivePage } from "./functions";
 import styled from "styled-components";
 import { PageSwitch } from "./PageSwitch";
 import { WeatherContent } from "./WeatherContent";
@@ -29,12 +29,12 @@ const App: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ dispatch,
       <PageSwitch activePage={activePage} onClick={() => changeActivePage(activePage, dispatch)} />
 
       <Header>
-        <Field>
+        {/*<Field>
           <div>Refreshed at</div>
           <Time>
             {currentTime && formatDate(currentTime, timezone)}
           </Time>
-        </Field>
+        </Field>*/}
         <Placeholder src={PlaceholderIcon} />
         <City> {city} </City>
 
@@ -91,11 +91,6 @@ color: #d853ea;
 font-size: 20px;
 `
 
-const Time = styled.div`
-    color: #84bdd8;
-    font-size: 33px;
-    padding: 0 50px;
-    `
 
 const Placeholder = styled.img`
   height: 30px;
@@ -109,7 +104,7 @@ const Flowers = styled.img`
   z-index: 0;
 `
 
-const Field = styled.div`
+/*const Field = styled.div`
     display: flex; 
     flex-direction: column;
     align-items: center;
@@ -118,5 +113,11 @@ const Field = styled.div`
     margin-top: -15px;
 `
 
+const Time = styled.div`
+    color: #84bdd8;
+    font-size: 33px;
+    padding: 0 50px;
+    `
+*/
 
 export default connect(mapStateToProps)(App);
