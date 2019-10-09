@@ -13,7 +13,9 @@ const initialState: stateInterface = {
   city: undefined, 
   activePage: Pages.weather, 
   sunrise: undefined, 
-  sunset: undefined
+  sunset: undefined, 
+  timezone: 0, 
+  currentTime: undefined
 };
 
 export const reducer = (state = initialState, action: actionInterface) => {

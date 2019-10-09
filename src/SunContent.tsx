@@ -6,15 +6,11 @@ import styled from "styled-components"
 import { mapStateToProps } from './App';
 import { connect } from "react-redux"
 import { stateInterface } from "./interfaces"
+import { formatDate } from "./functions";
 
-const formatDate = (n: number) => {
-    const minutes = "0" + n; 
-    return minutes.substr(-2)
-}
-
-export const _SunContent: React.FC<stateInterface> = ({ sunrise, sunset }) => {
-    const sunriseDate = sunrise && new Date(sunrise * 1000)
-    const sunsetDate = sunset && new Date(sunset * 1000)
+export const _SunContent: React.FC<stateInterface> = ({ sunrise, sunset, timezone }) => {
+    const sunriseDate = sunrise && formatDate(sunrise, timezone)
+    const sunsetDate = sunset && formatDate(sunset, timezone)
 
     return sunriseDate && sunsetDate ? <RightSide>
 
@@ -22,7 +18,7 @@ export const _SunContent: React.FC<stateInterface> = ({ sunrise, sunset }) => {
             <Icon1 src={SunriseIcon} />
             <Field>
                 <div> Sunrise </div>
-                <Time>{sunriseDate.getHours()}:{formatDate(sunriseDate.getMinutes())}</Time>
+                <Time>{sunriseDate}</Time>
             </Field>
         </Line>
 
@@ -30,7 +26,7 @@ export const _SunContent: React.FC<stateInterface> = ({ sunrise, sunset }) => {
             <Icon2 src={SunsetIcon} />
             <Field>
                 <div> Sunset </div>
-                <Time>{sunsetDate.getHours()}:{formatDate(sunsetDate.getMinutes())}</Time>
+                <Time>{sunsetDate}</Time>
             </Field>
         </Line>
 
