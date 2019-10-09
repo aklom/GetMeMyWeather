@@ -19,7 +19,11 @@ export interface stateInterface {
   longitude: number | undefined; 
   latitude: number | undefined;
   city: string | undefined; 
-  activePage: Pages
+  activePage: Pages;
+  sunrise: number | undefined; 
+  sunset: number | undefined;
+  currentTime: number | undefined;
+  timezone: number;
 }
 
 export interface actionInterface {

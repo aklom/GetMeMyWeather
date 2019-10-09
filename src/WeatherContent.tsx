@@ -1,4 +1,4 @@
-import React, { Dispatch } from "react"
+import React, {Dispatch} from "react"
 import styled from "styled-components"
 import { stateInterface } from "./interfaces"
 import { mapStateToProps } from './App';
@@ -11,7 +11,7 @@ import { changeActiveUnit } from "./functions";
 
 
 
-const _WeatherContent: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ icon, unit, weather, temperature, windSpeed, city, dispatch, longitude, latitude }) => {
+const _WeatherContent: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ icon, unit, weather, temperature, windSpeed, dispatch }) => {
     const iconImg = icon && icons.filter((item) => item.key === icon)
     const iconSrc = iconImg && iconImg[0].src
 
@@ -57,32 +57,29 @@ const _WeatherContent: React.FC<stateInterface & { dispatch: Dispatch<any> }> = 
 
 
 
-const Side = styled.div`
-  
-  z-index: 30;
-`
 
 const Line = styled.div`
     display: flex; 
     flex-direction: row; 
     justify-content: center;
-
-`
+    
+    `
 
 
 const SecondLine = styled(Line)`
     padding-top: 110px;
-`
+    `
 
 const ThirdLine = styled(Line)`
     padding-top: 180px;
-`
+    `
 
-const RightSide = styled(Side)`
+const RightSide = styled.div`
     padding-left: 400px;
     padding-top: 70px;
     display: flex; 
     flex-direction: column; 
+    z-index: 30;
     
 `
 const Field = styled.div`

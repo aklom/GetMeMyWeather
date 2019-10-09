@@ -10,7 +10,9 @@ interface WeatherApiResponse {
   weather: Array<{ description: string, icon: string }>;
   wind: { speed: number };
   name: string; 
-  sys: {country: string}
+  sys: {country: string, sunrise: string, sunset: string}; 
+  timezone: number; 
+  dt: number;
 }
 
 export const getWeatherData = (unit: string, longitude?: number, latitude?: number) => {
@@ -37,7 +39,11 @@ export const getWeatherData = (unit: string, longitude?: number, latitude?: numb
       weather: response.data.weather[0].description,
       windSpeed: `${response.data.wind.speed}${unit === Unit.METRIC ? " km/h" : " mi/h"}`, 
       icon: response.data.weather[0].icon, 
-      city: `${response.data.name},  ${response.data.sys.country}`
+      city: `${response.data.name},  ${response.data.sys.country}`, 
+      sunrise: response.data.sys.sunrise,
+      sunset: response.data.sys.sunset,
+      currentTime: response.data.dt, 
+      timezone: response.data.timezone
     }));
 };
 
@@ -94,4 +100,12 @@ export const changeActiveUnit = (activeUnit: Unit, dispatch: Dispatch<any>) => {
     })
   }
 
+}
+
+
+export const formatDate = (timestamp: number, timezone: number = 0) => {
+    const date =  new Date((timestamp + timezone - 3600)* 1000)
+    const minutes = "0" + date.getMinutes(); 
+    const hours = "0" + date.getHours();
+    return `${hours.substr(-2)}:${minutes.substr(-2)}`
 }
