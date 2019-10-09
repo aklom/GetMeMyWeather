@@ -18,7 +18,7 @@ interface WeatherApiResponse {
 export const getWeatherData = (unit: string, longitude?: number, latitude?: number) => {
   console.log("Get Weather Data");
 
-  let url = `https://api.openweathermap.org/data/2.5/weather`;
+  let url = `https://api.openweathermap.org/data/2.5/weather?units=${unit}&q=Paris`;
   if(longitude && latitude){
     url = `https://api.openweathermap.org/data/2.5/weather?units=${unit}&lat=${latitude}&lon=${longitude}`   
 

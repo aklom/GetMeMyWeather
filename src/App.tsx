@@ -20,7 +20,7 @@ const App: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ dispatch,
   useEffect(() => {
     updateData(unit, dispatch, pos.longitude, pos.latitude);
     setInterval(() => 
-    updateData(unit, dispatch, pos.longitude, pos.latitude), 60000
+    updateData(unit, dispatch, pos.longitude, pos.latitude), 300000
     )
   }, [dispatch, pos.longitude, pos.latitude, unit])
 
