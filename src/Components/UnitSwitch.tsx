@@ -1,6 +1,6 @@
 import React  from "react"
 import styled from "styled-components"
-import { Unit } from "./interfaces";
+import { Unit } from "../interfaces";
 
 
 export const UnitSwitch: React.FC<{ activeUnit: Unit, onClick: () => void }> = ({ activeUnit, onClick }) => {
@@ -13,6 +13,7 @@ export const UnitSwitch: React.FC<{ activeUnit: Unit, onClick: () => void }> = (
   </Wrapper>
 
 }
+
 
 const Wrapper = styled.div`
     background-color: #fafafa; 
