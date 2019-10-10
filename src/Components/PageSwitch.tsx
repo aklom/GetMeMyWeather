@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { Pages } from "./interfaces";
+import { Pages } from "../interfaces";
 
 
 export const PageSwitch: React.FC<{activePage: Pages, onClick: () => void}> = ({activePage, onClick}) => {

@@ -2,16 +2,16 @@ import React, { Dispatch, useEffect } from "react";
 import "./App.css";
 import { stateInterface, Pages } from "./interfaces";
 import { connect } from "react-redux";
-import { updateData, changeActivePage } from "./functions";
+import { updateData, changeActivePage, mapStateToProps } from "./functions";
 import styled from "styled-components";
-import { PageSwitch } from "./PageSwitch";
-import { WeatherContent } from "./WeatherContent";
-import { usePosition } from "./usePosition";
+import { PageSwitch } from "./Components/PageSwitch";
+import { WeatherContent } from "./Components/WeatherContent";
+import { usePosition } from "./hooks/usePosition";
 
 
 import BackgroundFlowers from './Assets/flowers.png';
-import PlaceholderIcon from "./Assets/placeholder2.png";
-import { SunContent } from './SunContent';
+import { SunContent } from './Components/SunContent';
+import { City } from "./Components/City";
 
 const App: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ dispatch, city, activePage, unit, longitude, latitude }) => {
 
@@ -23,6 +23,7 @@ const App: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ dispatch,
       updateData(unit, dispatch, pos.longitude, pos.latitude);
       setTimeout(updateDataRegularly, 300000)
     }
+
     if (pos.longitude && pos.latitude){
       updateDataRegularly()
     }
@@ -31,47 +32,20 @@ const App: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ dispatch,
 
   return (<>
     <Wrapper >
+
       <PageSwitch activePage={activePage} onClick={() => changeActivePage(activePage, dispatch)} />
+      <City/>
 
-      <Header>
-        {/*<Field>
-          <div>Refreshed at</div>
-          <Time>
-            {currentTime && formatDate(currentTime, timezone)}
-          </Time>
-        </Field>*/}
-        <Placeholder src={PlaceholderIcon} />
-        <City> {city} </City>
-
-      </Header>
       <Flowers src={BackgroundFlowers} />
 
-      {activePage === Pages.weather &&
-        <WeatherContent />}
+      {activePage === Pages.weather && <WeatherContent />}
 
       {activePage === Pages.sun && <SunContent />}
+
     </Wrapper>
   </>
   );
 
-}
-
-export function mapStateToProps(state: stateInterface) {
-  return {
-    weather: state.weather,
-    unit: state.unit,
-    icon: state.icon,
-    temperature: state.temperature,
-    windSpeed: state.windSpeed,
-    longitude: state.longitude,
-    latitude: state.latitude,
-    city: state.city,
-    activePage: state.activePage,
-    sunset: state.sunset,
-    sunrise: state.sunrise,
-    timezone: state.timezone,
-    currentTime: state.currentTime
-  };
 }
 
 const Wrapper = styled.div`
@@ -82,26 +56,6 @@ const Wrapper = styled.div`
  
 `
 
-const Header = styled.div`
-    position: absolute; 
-    right: 80px;
-    top: 60px;
-    
-    display: flex; 
-    flex-direction: row;
-    `
-
-const City = styled.div`
-color: #d853ea;
-font-size: 20px;
-`
-
-
-const Placeholder = styled.img`
-  height: 30px;
-  padding-right: 10px;
-`
-
 const Flowers = styled.img`
   position: absolute;
   left: -100px;
@@ -109,20 +63,5 @@ const Flowers = styled.img`
   z-index: 0;
 `
 
-/*const Field = styled.div`
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-    width: 260px;
-    font-size: 12px;
-    margin-top: -15px;
-`
-
-const Time = styled.div`
-    color: #84bdd8;
-    font-size: 33px;
-    padding: 0 50px;
-    `
-*/
 
 export default connect(mapStateToProps)(App);

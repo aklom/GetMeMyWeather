@@ -1,13 +1,12 @@
 import React, {Dispatch} from "react"
 import styled from "styled-components"
-import { stateInterface } from "./interfaces"
-import { mapStateToProps } from './App';
+import { stateInterface } from "../interfaces"
 import { connect } from "react-redux";
 
 
-import { icons } from "./Assets/icons.js";
+import { icons } from "../Assets/icons.js";
 import { UnitSwitch } from "./UnitSwitch";
-import { changeActiveUnit } from "./functions";
+import { changeActiveUnit, mapStateToProps } from "../functions";
 
 
 

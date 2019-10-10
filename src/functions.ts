@@ -1,7 +1,7 @@
 import axios from "axios";
-import { Dispatch } from "react";
 import { UnitChange, DataChange, PageChange } from "./actions";
-import { Pages, Unit } from './interfaces';
+import { Pages, Unit, stateInterface } from './interfaces';
+import { Dispatch } from 'react';
 
 interface WeatherApiResponse {
   main: {
@@ -108,4 +108,24 @@ export const formatDate = (timestamp: number, timezone: number = 0) => {
     const minutes = "0" + date.getMinutes(); 
     const hours = "0" + date.getHours();
     return `${hours.substr(-2)}:${minutes.substr(-2)}`
+}
+
+
+
+export function mapStateToProps(state: stateInterface) {
+  return {
+    weather: state.weather,
+    unit: state.unit,
+    icon: state.icon,
+    temperature: state.temperature,
+    windSpeed: state.windSpeed,
+    longitude: state.longitude,
+    latitude: state.latitude,
+    city: state.city,
+    activePage: state.activePage,
+    sunset: state.sunset,
+    sunrise: state.sunrise,
+    timezone: state.timezone,
+    currentTime: state.currentTime
+  };
 }

@@ -1,12 +1,11 @@
 import React from "react"
 
-import SunsetIcon from "./Assets/sunset.png"
-import SunriseIcon from "./Assets/sunrise.png"
+import SunsetIcon from "../Assets/sunset.png"
+import SunriseIcon from "../Assets/sunrise.png"
 import styled from "styled-components"
-import { mapStateToProps } from './App';
 import { connect } from "react-redux"
-import { stateInterface } from "./interfaces"
-import { formatDate } from "./functions";
+import { stateInterface } from "../interfaces"
+import { formatDate, mapStateToProps } from "../functions";
 
 export const _SunContent: React.FC<stateInterface> = ({ sunrise, sunset, timezone }) => {
     const sunriseDate = sunrise && formatDate(sunrise, timezone)
