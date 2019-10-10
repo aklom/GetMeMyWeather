@@ -71,7 +71,7 @@ const SecondLine = styled(Line)`
     `
 
 const ThirdLine = styled(Line)`
-    padding-top: 180px;
+    padding-top: 150px;
     `
 
 const RightSide = styled.div`
