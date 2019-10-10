@@ -13,16 +13,21 @@ import BackgroundFlowers from './Assets/flowers.png';
 import PlaceholderIcon from "./Assets/placeholder2.png";
 import { SunContent } from './SunContent';
 
-const App: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ dispatch, city, activePage, unit, currentTime, timezone }) => {
+const App: React.FC<stateInterface & { dispatch: Dispatch<any> }> = ({ dispatch, city, activePage, unit, longitude, latitude }) => {
 
   const pos = usePosition()
+ 
 
   useEffect(() => {
-    updateData(unit, dispatch, pos.longitude, pos.latitude);
-    setInterval(() => 
-    updateData(unit, dispatch, pos.longitude, pos.latitude), 300000
-    )
+    const updateDataRegularly = () => {
+      updateData(unit, dispatch, pos.longitude, pos.latitude);
+      setTimeout(updateDataRegularly, 300000)
+    }
+    if (pos.longitude && pos.latitude){
+      updateDataRegularly()
+    }
   }, [dispatch, pos.longitude, pos.latitude, unit])
+ 
 
   return (<>
     <Wrapper >
