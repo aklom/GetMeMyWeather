@@ -16,7 +16,7 @@ Bored of having to enter your city name on Google to see if you have to take you
 
 ## Demo 
 
-You can try it out on: https://location-weather-app.herokuapp.com/. Don't forget to allow your browser's location! :world_map:
+You can try it out on: https://get-me-my-weather.herokuapp.com/. Don't forget to allow your browser's location! :world_map:
 
 
 ## Run it locally
