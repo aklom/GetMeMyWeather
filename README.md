@@ -1,4 +1,4 @@
-# Get me my weather! :sunny:
+# GetMeMyWeather! :sunny:
 
 
 
